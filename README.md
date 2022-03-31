@@ -4,5 +4,5 @@ Find shell scripts, snippets and notes for common Linux tasks.
 
 ## Content
 
-* [Web page monitoring](web_monitor.sh)
+* [Website monitoring script](web_monitor.sh)
 * [MySQL backup script](mysql_backup.sh)
