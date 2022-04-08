@@ -6,6 +6,9 @@
 # Date: 31.03.2018                                                #
 ###################################################################
 
+# Load profile (optional)
+# source ~/.bash_profile
+
 # Retrieve HTTP status code
 export STATUS=`curl -s -o /dev/null -w "%{http_code}" http://example.com/`
 
