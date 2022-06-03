@@ -1,0 +1,71 @@
+#!/usr/bin/expect -f
+###################################################################
+# Written by: Oscar Escamilla                                     #
+# Purpose: To put file into SFTP server                           #
+# Input: host port user password local_file remote_path           #
+# Note: Installing expect: sudo apt install expect                #
+# Date: 23.12.2018                                                #
+###################################################################
+
+# Check the correct number of arguments
+if {[llength $argv] != 6} {
+
+    # Print how to use script
+    puts "usage: sftp_expect.exp host port user password local_file remote_path"
+    
+    # Exit with code 1
+    exit 1
+}
+    
+# Set variables in expect, lrange start at 0
+set host [lrange $argv 0 0]
+set port [lrange $argv 1 1]
+set user [lrange $argv 2 2 ]
+set password [lrange $argv 3 3]
+set filename [lrange $argv 4 4]
+set path [lrange $argv 5 5]
+
+# Timeout in seconds. Set -1 if expect should wait forever.
+set timeout 30
+
+# Connect to the remote server, the command spawn is used to execute another process
+spawn sftp -P $port -o StrictHostKeyChecking=no $user@$host
+
+# Send password
+expect {
+    -ex "password:" { send "$password\n" }
+    timeout {
+        puts "Everything is terrible forever"
+        exit 1
+    }
+}
+
+# Change path
+expect {
+    -ex "> " { send "cd $path\n" }
+    timeout {
+        puts "Everything is terrible forever"
+        exit 1
+    }
+}
+
+# Put file
+expect {
+    -ex "> " { send "put $filename\n" }
+    timeout {
+        puts "Everything is terrible forever"
+        exit 1
+    }
+}
+
+# Exit
+expect {
+    -ex "> " { send "exit\n" }
+    timeout {
+        puts "Everything is terrible forever"
+        exit 1
+    }
+}
+
+# Close the connection
+expect eof

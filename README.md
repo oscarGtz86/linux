@@ -7,6 +7,7 @@ Find shell scripts, snippets and notes for common Linux tasks.
 * [Installing Node.js](install_node.md)
 * [MySQL backup script](mysql_backup.sh)
 * [Mount Block Storage Volume](mount_bs.md)
+* [Using Expect and SFTP](sftp_expect.exp)
 * [Website monitoring script](web_monitor.sh)
 
 ## Author(s)
